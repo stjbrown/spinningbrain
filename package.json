@@ -1,0 +1,22 @@
+{
+  "name": "spinningbrain.io",
+  "version": "1.0.0",
+  "description": "AI Powered Enterprise Brain",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "mastra dev",
+    "build": "mastra build"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "mastra": "^1.12.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.41.0",
+    "zod": "^4.4.3"
+  }
+}
