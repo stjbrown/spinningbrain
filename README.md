@@ -1,4 +1,4 @@
-# Spinning Brain
+# Spinning Brain :brain:
 
 AI-powered enterprise knowledge and agent platform.
 
