@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
-    "okf:seed": "node --env-file=.env scripts/seed-okf-workspace.mjs",
+    "okf:init": "node --env-file=.env scripts/init-workspace.mjs",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/**/*.test.ts"
   },

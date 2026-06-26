@@ -42,7 +42,7 @@ Conversational and observational memory are stored in a local LibSQL database (`
 ```bash
 cp .env.example .env        # fill R2 + OPENROUTER_API_KEY + SB_WORKSPACE_BUCKET
 npm install
-npm run okf:seed            # seed a test workspace with two starter kbs (ci/, personal/)
+npm run okf:init            # initialize an empty workspace skeleton (the agent creates kbs on first run)
 npm run dev                 # Mastra Studio at http://localhost:4111
 ```
 
@@ -60,5 +60,5 @@ memory. See the plan for phasing.
 - `src/mastra/skills/` — product-level OKF read/write skills
 - `src/mastra/workspaces/` — R2-backed workspace wiring
 - `src/mastra/memory/`, `src/mastra/storage.ts` — durable memory (LibSQL)
-- `scripts/seed-okf-workspace.mjs` — seed a workspace skeleton
+- `scripts/init-workspace.mjs` — initialize an empty workspace skeleton; the agent onboards the user and creates kbs (via `AGENTS.md`)
 - `docs/research/OKF_SPEC.md` — the Open Knowledge Format specification
