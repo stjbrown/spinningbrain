@@ -3,9 +3,10 @@
 **Status:** Draft 1 — 2026-06-26
 **Goal:** Ship a repeatable, per-customer, OKF-compliant Mastra agent with a web front end and a Slack channel.
 
-This plan deliberately *trims* the current spinningbrain platform machinery (multi-brain registry, git-import,
+This plan deliberately *trims* the earlier platform machinery (multi-collection registry, git-import,
 charter adaptation, `inbox/`, `._spinningbrain/`, archive export) down to a lean single-tenant-per-deployment
-agent. Those features are a post-MVP platform layer, not MVP.
+agent. That machinery has been **removed** from the tree (recoverable on the `archive/multi-brain-snapshot`
+branch); a per-customer platform layer is post-MVP.
 
 ---
 
@@ -52,10 +53,13 @@ agent. Those features are a post-MVP platform layer, not MVP.
 - **One agent, multiple transports.** Web and Slack are thin adapters over the *same* agent + workspace + memory.
   No separate "Slack agent". Channel-specific formatting happens at the edge.
 
-### What this drops from the current repo (for MVP)
-- `brains/{id}/` multi-brain layout and `._spinningbrain/directory.json` registry → **gone**; one bundle per bucket.
-- `import-git-brain`, `inspect-git-source`, `export-brain-archive`, `list-brains` workflows → **parked** (move out of `index.ts`).
-- Charter adaptation / `inbox/` shared-evidence model → **parked**.
+### What this drops from the earlier repo (for MVP) — now removed from the tree
+- The old multi-collection layout (`brains/{id}/`) and its `directory.json` registry → **removed**; one
+  `knowledge/` (with kbs) per bucket instead.
+- The `create` / `git-import` / `export-archive` / `list` lifecycle workflows and their services → **removed**.
+- Charter adaptation / `inbox/` shared-evidence model → **removed**.
+
+All recoverable from the `archive/multi-brain-snapshot` branch if any of it is needed later.
 
 ### What it keeps / reuses
 - Agent factory + memory (LibSQL) wiring (`agents/`, `memory/`, `storage.ts`).
@@ -123,7 +127,7 @@ spec on demand. Optionally add a small **`okf_lint` tool** later that validates 
 ### Phase 0 — Lean the repo (no behavior change yet)
 - Move parked workflows out of `src/mastra/index.ts` registration (keep files; stop wiring them).
 - Reduce the agent's workflow set to none (or just a future `provision` hook). Trim instructions.
-- **Exit:** typecheck clean, `mastra dev` boots a single agent with no multi-brain workflows.
+- **Exit:** typecheck clean, `mastra dev` boots a single agent with no lifecycle workflows.
 
 ### Phase 1 — OKF agent on R2 (the vertical slice) ⭐
 - Repoint `spin-workspace.ts` `S3Filesystem` at R2 (endpoint, `region:'auto'`, R2 keys, `forcePathStyle`).
@@ -164,7 +168,7 @@ spec on demand. Optionally add a small **`okf_lint` tool** later that validates 
 R2_ACCOUNT_ID=...
 R2_ACCESS_KEY_ID=...
 R2_SECRET_ACCESS_KEY=...
-SB_BRAIN_BUCKET=<customer-slug>          # bucket = workspace root
+SB_WORKSPACE_BUCKET=<customer-slug>      # bucket = workspace root
 R2_ENDPOINT=https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
 
 # Model + memory
