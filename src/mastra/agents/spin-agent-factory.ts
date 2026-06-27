@@ -1,6 +1,6 @@
 import { Agent } from '@mastra/core/agent'
 import { spinSystemPrompt } from '../prompts/spin-system-prompt'
-import { currentDateTool } from '../tools/current-date'
+import { dateTool } from '../tools/date'
 import { createSpinMemory } from '../memory/spin-memory'
 import { createSpinWorkspace, type SpinWorkspaceConfig } from '../workspaces/spin-workspace'
 import { DEFAULT_AGENT_MODEL } from './models'
@@ -40,7 +40,7 @@ export function createSpinAgent(config: SpinWorkspaceConfig) {
     model: DEFAULT_AGENT_MODEL,
     memory: createSpinMemory(),
     workspace,
-    tools: { current_date: currentDateTool },
+    tools: { date: dateTool },
     defaultOptions: {
       maxSteps: 20,
     },
