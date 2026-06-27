@@ -81,10 +81,22 @@ as first-run setup.
 6. Confirm what was created and invite the user to start adding knowledge.
 7. Finally, now that the workspace has at least one bundle, retire this onboarding so it never runs
    again: overwrite \`AGENTS.md\` at the workspace root, replacing ALL of its current contents and
-   keeping none of this onboarding text. Use exactly this content — a top-level heading
-   \`# Customer Instructions\`, then a blank line, then the single line: "Add customer-specific
-   guidance for the agent here. It is appended to the agent's system prompt at runtime. Intentionally
-   minimal by default."
+   keeping none of this onboarding text. Write a short **knowledge-handling config scaffold** the
+   customer can tune — these adjust the defaults built into your \`okf-write\` behavior. Use this
+   structure:
+   - A top-level heading \`# Customer Instructions\`, then a one-line note that this file is appended to
+     the agent's system prompt at runtime and is safe to edit.
+   - A \`## Knowledge handling preferences\` section stating the defaults (and that per-kb overrides can
+     be added under a \`### <kb>\` heading):
+     - **Source-authority tiers** — High: official / primary sources (release notes, changelogs,
+       filings, the entity itself). Medium: reputable secondary reporting. Low / rumor: community and
+       social (forums, social posts, unverified word-of-mouth).
+     - **Supersede threshold** — replace existing knowledge only on a High-tier change signal;
+       otherwise record the disagreement as a conflicting signal and keep both.
+     - **Cosmetic edits** — fixing typos, links, and metadata in place is fine; never rewrite a claim's
+       meaning.
+     - **Answer style** — when knowledge is contested, give a hedged, sourced, time-aware answer rather
+       than a flat yes/no.
 
 Once \`knowledge/index.md\` lists one or more bundles — or this onboarding section is no longer present
 in \`AGENTS.md\` — setup is complete: operate normally per your base instructions.
