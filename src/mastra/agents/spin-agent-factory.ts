@@ -1,5 +1,6 @@
 import { Agent } from '@mastra/core/agent'
 import { spinSystemPrompt } from '../prompts/spin-system-prompt'
+import { firecrawlTools } from '../mcp/firecrawl'
 import { dateTool } from '../tools/date'
 import { createSpinMemory } from '../memory/spin-memory'
 import { createSpinWorkspace, type SpinWorkspaceConfig } from '../workspaces/spin-workspace'
@@ -40,7 +41,8 @@ export function createSpinAgent(config: SpinWorkspaceConfig) {
     model: DEFAULT_AGENT_MODEL,
     memory: createSpinMemory(),
     workspace,
-    tools: { date: dateTool },
+    // `date` is always available; Firecrawl web tools are present only when FIRECRAWL_API_KEY is set.
+    tools: { date: dateTool, ...firecrawlTools },
     defaultOptions: {
       maxSteps: 20,
     },
