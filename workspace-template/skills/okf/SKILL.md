@@ -47,6 +47,13 @@ exhaustive.
 - Pasted text with no source: **ask for a source URL.** If there truly is none, record it as
   `type: Note` with no `resource:` (user-originated — honestly distinct from sourced material).
 
+### Entity-first — build durable concepts, not just dated snapshots
+Prefer durable **entity/topic concepts** that accumulate over time (a product, company, capability),
+and let incoming sources *feed* them — don't just drop a fresh dated snapshot per ingest. Dated items
+(a specific release, a news item) are the **evidence trail**; the entity concept is the living synthesis
+that cites them. Keep an `_overview`/index concept per area as the entry point, and as an area grows,
+**fan out** into sub-bundles (e.g. `netskope/ai_gateway/`, `netskope/npa/`).
+
 ### Append-only on content
 The test for any edit: *does it change what the document asserts?*
 - **OK to edit in place:** spelling/typos, fixing or adding links, normalizing `type`/metadata,
@@ -63,6 +70,14 @@ The test for any edit: *does it change what the document asserts?*
   the **source** — its authority tier (see `AGENTS.md`) and how many independent sources corroborate —
   **never from your own sense of what's true.**
 - Ambiguous? Default to `conflicts_with`, never to supersede.
+
+### Events & timelines — additive, do NOT supersede
+Event-like records — a specific release, a news item, a dated report — are **additive historical
+facts**. They accumulate as a **timeline**; a newer one does NOT supersede an older one (Release 138's
+notes don't make Release 137's false). Keep each as its own active concept. Distinguish a *specific*
+instance ("Release 138" — immutable) from a *current/latest* pointer ("latest release" — a small
+concept that you update to point at the newest). Only supersede when new info *corrects or replaces* a
+claim (below).
 
 ### Superseding — do it atomically
 Write the new concept; set `superseded_by:` on the old and `supersedes:` on the new (with
