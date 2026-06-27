@@ -5,7 +5,6 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
@@ -20,7 +19,6 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1067.0",
     "@mastra/core": "^1.46.0",
     "@mastra/libsql": "^1.14.1",
     "@mastra/memory": "^1.21.1",
